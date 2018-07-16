@@ -1,4 +1,6 @@
-//Setup canvas element.
+$(document).ready(function(){
+
+//Cria o elemento canvas
 var canvas = $('canvas.dots');
 var context = canvas[0].getContext('2d');
 var canvasWidth = canvas.Width();
@@ -62,4 +64,6 @@ function drawDot(dot) {
 	context.arc(dot.x, dot.y, dot.radius, 0, 2 * Math.PI, false);
 	context.fillStyle = '#FFF';
 	context.fill();
+}
+
 }
