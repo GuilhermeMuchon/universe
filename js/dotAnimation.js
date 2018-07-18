@@ -1,33 +1,33 @@
-$(document).ready(function(){
+document.addEventListener('DOMContentLoaded',domloaded,false);
+
+function domloaded(){
 
 //Cria o elemento canvas
 var canvas = $('canvas.dots');
 var context = canvas[0].getContext('2d');
-var canvasWidth = canvas.Width();
-var canvasHeight = canvas.Height();
+var canvasWidth = canvas.width();
+var canvasHeight = canvas.height();
 
 canvas.attr({
 	height: canvasHeight,
 	width: canvasWidth
 });
 
-//Quantos frames vai rodar
-var frames = 150;
-
-//Referência para os frames
-var currentFrame = 0;
-
 //Cria o ponto
 var dot = {
-	x: 10,
-	y: 10,
-	radius: 5
+	x: 1000,
+	y: 500,
+	radius: 5,
+	xMove: '+', //Diz a direção que moverá o ponto
+	yMove: '+'
 };
 
+drawDot(dot);
+
 //Inicia a animação do frame conforme é definido o tempo
-setTimeout(function()){
+setTimeout(function(){
 	window.requestAnimationFrame(moveDot);
-}, 1000);
+}, 2500);
 
 //Função para mover o ponto
 function moveDot(){
@@ -35,25 +35,53 @@ function moveDot(){
 	//Limpa o canvas
 	context.clearRect(0, 0, canvasWidth, canvasHeight)
 
-	//Define a pos x e y
-	dot.x += 1;
-	dot.y += 1;
+	if(dot.xMove == '+') {
+		dot.x += 1;
+	} else {
+		dot.x -= 1;
+	}
+
+	if(dot.yMove == '+') {
+		dot.y += 1;
+	} else {
+		dot.y -= 1;
+	}
 
 	//Desenha o ponto
 	drawDot(dot)
 
-	//Passa o tempo para +1 frame
-	currentFrame += 1;
-
-	//Se chega no max de frames reseta
-	if(currentFrame == frames) {
-		currentFrame = 0;
-		dot = {
-			x: 10,
-			y: 10,
-			radius: 5
-		};
+	/*if( (dot.x + dot.radius) == canvasWidth ) {
+		dot.xMove = '-';
 	}
+	if( (dot.x - dot.radius) == 0 ) {
+		dot.xMove = '+';
+	}
+	if( (dot.y + dot.radius) == canvasHeight ) {
+		dot.yMove = '-';
+	}
+	if( (dot.y - dot.radius) == 0 ) {
+		dot.yMove = '+';
+	}*/
+
+
+	//Define o angulo que o ponto vai andar
+	if((dot.x + dot.radius) > (canvasWidth/2) 
+		&& (dot.y + dot.radius) > (canvasHeight/2)){
+			dot.xMove = '+'
+			dot.yMove = '+'
+	} else if((dot.x + dot.radius) > (canvasWidth/2) 
+		&& (dot.y + dot.radius) < (canvasHeight/2)){
+			dot.xMove = '+'
+			dot.yMove = '-'
+	} else if((dot.x + dot.radius) < (canvasWidth/2) 
+		&& (dot.y + dot.radius) > (canvasHeight/2)){
+			dot.xMove = '-'
+			dot.yMove = '+'
+	}else if((dot.x + dot.radius) < (canvasWidth/2) 
+		&& (dot.y + dot.radius) < (canvasHeight/2)){
+			dot.xMove = '-'
+			dot.yMove = '-'
+		}
 
 	//Chama a função novamente
 	window.requestAnimationFrame(moveDot);
