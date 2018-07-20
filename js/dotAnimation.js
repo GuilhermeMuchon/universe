@@ -14,15 +14,38 @@ canvas.attr({
 });
 
 //Cria o ponto
-var dot = {
-	x: 1000,
-	y: 500,
-	radius: 5,
-	xMove: '+', //Diz a direção que moverá o ponto
-	yMove: '+'
-};
+var dots = [{x: canvasWidth/2, y: canvasHeight/2, radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'},
+{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: Math.floor(Math.random() * 5), xMove: '+', yMove: '+'}];
 
-drawDot(dot);
+//Desenha cada ponto da array
+for( i = 0; i < dots.length; i++ ) {
+	drawDot(dots[i]);
+};
+//drawDot(dot);
 
 //Inicia a animação do frame conforme é definido o tempo
 setTimeout(function(){
@@ -35,53 +58,59 @@ function moveDot(){
 	//Limpa o canvas
 	context.clearRect(0, 0, canvasWidth, canvasHeight)
 
-	if(dot.xMove == '+') {
-		dot.x += 1;
-	} else {
-		dot.x -= 1;
-	}
-
-	if(dot.yMove == '+') {
-		dot.y += 1;
-	} else {
-		dot.y -= 1;
-	}
-
-	//Desenha o ponto
-	drawDot(dot)
-
-	/*if( (dot.x + dot.radius) == canvasWidth ) {
-		dot.xMove = '-';
-	}
-	if( (dot.x - dot.radius) == 0 ) {
-		dot.xMove = '+';
-	}
-	if( (dot.y + dot.radius) == canvasHeight ) {
-		dot.yMove = '-';
-	}
-	if( (dot.y - dot.radius) == 0 ) {
-		dot.yMove = '+';
-	}*/
-
-
-	//Define o angulo que o ponto vai andar
-	if((dot.x + dot.radius) > (canvasWidth/2) 
-		&& (dot.y + dot.radius) > (canvasHeight/2)){
-			dot.xMove = '+'
-			dot.yMove = '+'
-	} else if((dot.x + dot.radius) > (canvasWidth/2) 
-		&& (dot.y + dot.radius) < (canvasHeight/2)){
-			dot.xMove = '+'
-			dot.yMove = '-'
-	} else if((dot.x + dot.radius) < (canvasWidth/2) 
-		&& (dot.y + dot.radius) > (canvasHeight/2)){
-			dot.xMove = '-'
-			dot.yMove = '+'
-	}else if((dot.x + dot.radius) < (canvasWidth/2) 
-		&& (dot.y + dot.radius) < (canvasHeight/2)){
-			dot.xMove = '-'
-			dot.yMove = '-'
+	for( i = 0; i < dots.length; i++ ) {
+		if(dots[i].xMove == '+') {
+			dots[i].x += 3;
+		} else {
+			dots[i].x -= 3;
 		}
+
+		if(dots[i].yMove == '+') {
+			dots[i].y += 3;
+		} else {
+			dots[i].y -= 3;
+		}
+
+		//Desenha o ponto
+		drawDot(dots[i])
+
+		//Faz o ponto rebater nos cantos da tela
+		/*if( (dot.x + dot.radius) == canvasWidth ) {
+			dot.xMove = '-';
+		}
+		if( (dot.x - dot.radius) == 0 ) {
+			dot.xMove = '+';
+		}
+		if( (dot.y + dot.radius) == canvasHeight ) {
+			dot.yMove = '-';
+		}
+		if( (dot.y - dot.radius) == 0 ) {
+			dot.yMove = '+';
+		}*/
+
+
+		//Define o angulo que o ponto vai andar
+		if (dots[i].y < 0 || dots[i].y > canvasHeight){
+			dots[i].x = Math.floor(Math.random() * canvasWidth);
+			dots[i].y = Math.floor(Math.random() * canvasHeight);
+		} else if((dots[i].x + dots[i].radius) > (canvasWidth/2) 
+			&& (dots[i].y + dots[i].radius) > (canvasHeight/2)){
+			dots[i].xMove = '+'
+			dots[i].yMove = '+'
+		} else if((dots[i].x + dots[i].radius) > (canvasWidth/2) 
+			&& (dots[i].y + dots[i].radius) < (canvasHeight/2)){
+			dots[i].xMove = '+'
+			dots[i].yMove = '-'
+		} else if((dots[i].x + dots[i].radius) < (canvasWidth/2) 
+			&& (dots[i].y + dots[i].radius) > (canvasHeight/2)){
+			dots[i].xMove = '-'
+			dots[i].yMove = '+'
+		}else if((dots[i].x + dots[i].radius) < (canvasWidth/2) 
+			&& (dots[i].y + dots[i].radius) < (canvasHeight/2)){
+			dots[i].xMove = '-'
+			dots[i].yMove = '-'
+		}
+	}
 
 	//Chama a função novamente
 	window.requestAnimationFrame(moveDot);
