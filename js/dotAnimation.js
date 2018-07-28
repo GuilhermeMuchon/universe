@@ -7,7 +7,10 @@ var canvas = $('canvas.dots');
 var context = canvas[0].getContext('2d');
 var canvasWidth = canvas.width();
 var canvasHeight = canvas.height();
-var quantidade = 50;
+var quantidade = 150;
+var cores = ['#7BC954', '#007EBF', '#DC3527', '#9AD9F2', '#FFFFFF', '#FFDB8E'];
+
+
 
 canvas.attr({
 	height: canvasHeight,
@@ -38,18 +41,18 @@ function moveDot(){
 	for( i = 0; i < dots.length; i++ ) {
 		if(dots[i].xMove == '+') {
 			dots[i].x += dots[i].aceleracao;
-			dots[i].radius += (10/(Math.random() * 5000 + 2000));
+			dots[i].radius += (10/(Math.random() * 3000 + 1000));
 		} else {
 			dots[i].x -= dots[i].aceleracao;
-			dots[i].radius += (10/(Math.random() * 5000 + 2000));
+			dots[i].radius += (10/(Math.random() * 3000 + 1000));
 		}
 
 		if(dots[i].yMove == '+') {
 			dots[i].y += dots[i].aceleracao;
-			dots[i].radius += (10/(Math.random() * 5000 + 2000));
+			dots[i].radius += (10/(Math.random() * 3000 + 1000));
 		} else {
 			dots[i].y -= dots[i].aceleracao;
-			dots[i].radius += (10/(Math.random() * 5000 + 2000));
+			dots[i].radius += (10/(Math.random() * 3000 + 1000));
 		}
 
 		//Desenha o ponto
@@ -76,6 +79,7 @@ function moveDot(){
 			dots[i].y = Math.floor(Math.random() * canvasHeight);
 			dots[i].aceleracao = Math.floor(Math.random() * 3 + 2);
 			dots[i].radius = 0;
+			dots[i].color = cores[Math.floor(Math.random() * cores.length)];
 		} else if((dots[i].x + dots[i].radius) > (canvasWidth/2) 
 			&& (dots[i].y + dots[i].radius) > (canvasHeight/2)){
 			dots[i].xMove = '+'
@@ -102,15 +106,32 @@ function moveDot(){
 function drawDot(dot) {
 	context.beginPath();
 	context.arc(dot.x, dot.y, dot.radius, 0, 2 * Math.PI, false);
-	context.fillStyle = '#FFF';
+	context.fillStyle = dot.color;
 	context.fill();
 }
 
-function createDot(amount){
-	for(i = 0; i < amount; i++){
+function createDot(amount) {
+	for(i = 0; i < amount; i++) {
 		dots[i] = {x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight),
-			radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 2)};
+			radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 2), 
+			color: cores[Math.floor(Math.random() * cores.length)]};
 	}
 }
+
+//Função que tentei utilizar para fazer a alterações das cores mas deu muito certo
+/*function chooseColor() {
+	var cor = Math.floor(Math.random() * 10);
+	if(cor == 7) {
+		return dots[i] = {color: '#7BC954'};
+	} else if(cor == 8) {
+		return dots[i] = {color: '#007EBF'};
+	} else if(cor == 9) {
+		return dots[i] = {color: '#DC3527'};
+	} else if(cor == 10) {
+		return dots[i] = {color: '#9AD9F2'};
+	} else {
+		return dots[i] = {color: '#FFFFFF'};
+	}
+}*/
 
 }
