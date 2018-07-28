@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded',domloaded,false);
+document.addEventListener('DOMContentLoaded', domloaded, false);
 
 function domloaded(){
 
@@ -7,6 +7,7 @@ var canvas = $('canvas.dots');
 var context = canvas[0].getContext('2d');
 var canvasWidth = canvas.width();
 var canvasHeight = canvas.height();
+var quantidade = 50;
 
 canvas.attr({
 	height: canvasHeight,
@@ -14,32 +15,8 @@ canvas.attr({
 });
 
 //Cria o ponto
-var dots = [{x: canvasWidth/2, y: canvasHeight/2, radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)},
-{x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight), radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 1)}];
+var dots = [];
+createDot(quantidade);
 
 //Desenha cada ponto da array
 for( i = 0; i < dots.length; i++ ) {
@@ -61,18 +38,18 @@ function moveDot(){
 	for( i = 0; i < dots.length; i++ ) {
 		if(dots[i].xMove == '+') {
 			dots[i].x += dots[i].aceleracao;
-			dots[i].radius += 0.010;
+			dots[i].radius += (10/(Math.random() * 5000 + 2000));
 		} else {
 			dots[i].x -= dots[i].aceleracao;
-			dots[i].radius += 0.010;
+			dots[i].radius += (10/(Math.random() * 5000 + 2000));
 		}
 
 		if(dots[i].yMove == '+') {
 			dots[i].y += dots[i].aceleracao;
-			dots[i].radius += 0.010;
+			dots[i].radius += (10/(Math.random() * 5000 + 2000));
 		} else {
 			dots[i].y -= dots[i].aceleracao;
-			dots[i].radius += 0.010;
+			dots[i].radius += (10/(Math.random() * 5000 + 2000));
 		}
 
 		//Desenha o ponto
@@ -97,7 +74,7 @@ function moveDot(){
 		if (dots[i].y < 0 || dots[i].y > canvasHeight){
 			dots[i].x = Math.floor(Math.random() * canvasWidth);
 			dots[i].y = Math.floor(Math.random() * canvasHeight);
-			dots[i].aceleracao = Math.floor(Math.random() * 3 + 1);
+			dots[i].aceleracao = Math.floor(Math.random() * 3 + 2);
 			dots[i].radius = 0;
 		} else if((dots[i].x + dots[i].radius) > (canvasWidth/2) 
 			&& (dots[i].y + dots[i].radius) > (canvasHeight/2)){
@@ -129,6 +106,11 @@ function drawDot(dot) {
 	context.fill();
 }
 
-/*function createDot(amount)
-	for()*/
+function createDot(amount){
+	for(i = 0; i < amount; i++){
+		dots[i] = {x: Math.floor(Math.random() * canvasWidth), y: Math.floor(Math.random() * canvasHeight),
+			radius: 0, xMove: '+', yMove: '+', aceleracao: Math.floor(Math.random() * 3 + 2)};
+	}
+}
+
 }
