@@ -1,2 +1,2 @@
 # universe
-o site mais show que a internet já conheceu
+a nice little dot animation about universe using javascript and html5 canvas, still work in progress
